@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
+}
+
+/* ---- Brand colors: change these to customize your design ---- */
+:root[data-theme="light"] {
+  --color-primary: #e8590c;
+  --color-primary-content: #ffffff;
+}
+:root[data-theme="dark"] {
+  --color-primary: #ff922b;
+  --color-primary-content: #1a1a1a;
+}
