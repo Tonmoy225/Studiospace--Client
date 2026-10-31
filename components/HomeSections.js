@@ -12,21 +12,22 @@ import {
 import { CATEGORIES } from "@/lib/constants";
 
 // TODO: replace these image links with your own (Unsplash / imgbb)
+// Free-to-use studio photos (Pexels / Unsplash license)
 const slides = [
   {
-    image: "https://picsum.photos/seed/hero1/1600/800",
-    title: "Find the Perfect Studio for Your Next Shoot",
-    text: "Photo studios, film stages and more, available by the hour.",
+    image: "https://images.pexels.com/photos/3935023/pexels-photo-3935023.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    title: "Shoot Your Next Film on a Pro Set",
+    text: "Film stages and photo studios with lighting, crew space and gear, available by the hour.",
   },
   {
-    image: "https://picsum.photos/seed/hero2/1600/800",
+    image: "https://images.unsplash.com/photo-1781865202629-c0ab5921973b?q=80&w=1600&auto=format&fit=crop",
     title: "Record Your Sound in a Pro Space",
-    text: "Podcast lounges and music suites with studio-grade gear.",
+    text: "Music suites and recording studios with studio-grade gear.",
   },
   {
-    image: "https://picsum.photos/seed/hero3/1600/800",
-    title: "Turn Your Empty Space into Income",
-    text: "List your studio and let creators book it instantly.",
+    image: "https://images.pexels.com/photos/5083605/pexels-photo-5083605.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    title: "Start Your Podcast in a Ready-Made Lounge",
+    text: "Soundproof podcast rooms with microphones and mixers, ready when you are.",
   },
 ];
 
