@@ -19,7 +19,7 @@ export default function ThemeToggle() {
   };
 
   return (
-    <button onClick={toggle} className="btn btn-ghost btn-circle">
+    <button onClick={toggle} className="btn btn-ghost btn-circle btn-sm sm:btn-md">
       {theme === "light" ? <FiMoon size={20} /> : <FiSun size={20} />}
     </button>
   );

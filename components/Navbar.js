@@ -41,34 +41,43 @@ export default function Navbar() {
     </li>
   ));
 
-  return (
-    <div className="navbar bg-base-100 shadow-sm sticky top-0 z-50 px-4 lg:px-10">
-      <div className="navbar-start">
+    return (
+    <div className="navbar bg-base-100 shadow-sm sticky top-0 z-50 px-2 sm:px-4 lg:px-10 gap-1">
+      {/* LEFT: hamburger (mobile) + logo */}
+      <div className="navbar-start w-auto flex-1">
         <div className="dropdown">
-          <div tabIndex={0} className="btn btn-ghost lg:hidden">
+          <div tabIndex={0} className="btn btn-ghost btn-sm px-2 lg:hidden">
             <FiMenu size={22} />
           </div>
           <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow">
             {navLinks}
+            {/* only on very small phones (below 340px) Register moves into this menu */}
+            {!user && !isPending && (
+              <li className="min-[340px]:hidden">
+                <Link href="/register">Register</Link>
+              </li>
+            )}
           </ul>
         </div>
-        <Link href="/" className="flex items-center gap-2 text-2xl font-bold text-primary">
-          <FiAperture size={28} /> StudioSpace
+        <Link href="/" className="flex items-center gap-1 sm:gap-2 text-base sm:text-2xl font-bold text-primary whitespace-nowrap">
+          <FiAperture className="text-xl sm:text-3xl" /> StudioSpace
         </Link>
       </div>
 
+      {/* CENTER: links (desktop only) */}
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal gap-1">{navLinks}</ul>
       </div>
 
-      <div className="navbar-end gap-2">
+      {/* RIGHT: theme toggle + auth */}
+      <div className="navbar-end w-auto flex-1 gap-1 sm:gap-2">
         <ThemeToggle />
         {isPending ? (
           <span className="loading loading-spinner"></span>
         ) : user ? (
           <div className="dropdown dropdown-end dropdown-hover">
             <div tabIndex={0} className="avatar cursor-pointer">
-              <div className="w-10 rounded-full">
+              <div className="w-9 sm:w-10 rounded-full">
                 <img
                   src={user.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}`}
                   alt={user.name}
@@ -86,8 +95,8 @@ export default function Navbar() {
           </div>
         ) : (
           <>
-            <Link href="/login" className="btn btn-outline btn-primary btn-sm md:btn-md">Login</Link>
-            <Link href="/register" className="btn btn-primary btn-sm md:btn-md">Register</Link>
+            <Link href="/login" className="btn btn-outline btn-primary btn-xs sm:btn-sm md:btn-md">Login</Link>
+            <Link href="/register" className="btn btn-primary btn-xs sm:btn-sm md:btn-md hidden min-[340px]:inline-flex">Register</Link>
           </>
         )}
       </div>
