@@ -52,8 +52,8 @@ export default function StudioDetailsPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
-      <div className="grid gap-8 lg:grid-cols-3">
-        <div className="lg:col-span-2">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <div className="lg:col-span-2 min-w-0">
           <Swiper modules={[Navigation, Pagination]} navigation pagination={{ clickable: true }} className="rounded-xl">
             {images.map((img, i) => (
               <SwiperSlide key={i}>
