@@ -96,7 +96,7 @@ export default function StudioDetailsPage() {
         </div>
 
         <div>
-          <div className="card bg-base-100 shadow-lg p-6 sticky top-24">
+          <div className="card bg-base-100 shadow-lg p-6 lg:sticky lg:top-24">
             <p className="text-3xl font-bold text-primary">${studio.hourlyRate} <span className="text-base font-normal opacity-70">/ hr</span></p>
             <p className="opacity-70 mt-1">Security deposit: ${studio.securityDeposit}</p>
             <button onClick={handleBookClick} className="btn btn-primary w-full mt-4">Book Workspace Now</button>
