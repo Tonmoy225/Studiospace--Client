@@ -29,7 +29,6 @@ function MyBookings() {
   }, []);
 
   const handleCancel = async () => {
-
     setCancelling(true);
     try {
       await api(`/bookings/${cancelId}/cancel`, { method: "PATCH" });
@@ -41,8 +40,8 @@ function MyBookings() {
     setCancelling(false);
     setCancelId(null);
   };
-  
-    const handleInvoice = async (b) => {
+
+  const handleInvoice = async (b) => {
     try {
       await downloadInvoice(b);
       toast.success("Invoice downloaded");
@@ -64,7 +63,7 @@ function MyBookings() {
           <Link href="/studios" className="btn btn-primary">Explore Studios</Link>
         </div>
       ) : (
-        <div className="grid gap-4">
+        <div className="grid grid-cols-1 gap-4">
           {bookings.map((b) => (
             <div key={b._id} className="card md:card-side bg-base-100 shadow-md">
               <figure className="md:w-56 h-40 md:h-auto">
@@ -78,6 +77,13 @@ function MyBookings() {
                 <p className="opacity-70">{b.location}</p>
                 <p>{b.date} | {b.startTime} - {b.endTime} ({b.hours} hrs)</p>
                 <p className="font-bold text-primary">Total: ${b.totalPrice}</p>
+                {(b.status === "Confirmed" || b.status === "Completed") && (
+                  <div className="card-actions justify-end">
+                    <button onClick={() => handleInvoice(b)} className="btn btn-sm btn-outline btn-primary">
+                      Download Invoice (PDF)
+                    </button>
+                  </div>
+                )}
                 {b.status === "Pending" && (
                   <div className="card-actions justify-end">
                     <button onClick={() => setCancelId(b._id)} className="btn btn-sm btn-error">Cancel Booking</button>
