@@ -22,7 +22,7 @@ export default function FeaturedStudios() {
       <h2 className="text-3xl font-bold text-center">Featured Studios</h2>
       <p className="text-center opacity-70 mt-2 mb-8">Top rated creative spaces loved by our community</p>
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {loading
           ? [1, 2, 3, 4, 5, 6].map((n) => <StudioSkeleton key={n} />)
           : studios.map((s) => <StudioCard key={s._id} studio={s} />)}

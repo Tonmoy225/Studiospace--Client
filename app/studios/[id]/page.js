@@ -66,7 +66,7 @@ export default function StudioDetailsPage() {
             <span className="badge badge-primary">{studio.category}</span>
             <span className="badge badge-warning gap-1"><FiStar /> {studio.rating ? studio.rating.toFixed(1) : "New"}</span>
           </div>
-          <h1 className="text-3xl font-bold mt-3">{studio.title}</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold mt-3 break-words">{studio.title}</h1>
           <p className="flex items-center gap-2 opacity-70 mt-2"><FiMapPin /> {studio.location}</p>
           <p className="flex items-center gap-2 opacity-70 mt-1"><FiUsers /> Max capacity: {studio.capacity} people</p>
 
