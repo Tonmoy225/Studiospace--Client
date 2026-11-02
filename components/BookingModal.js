@@ -91,8 +91,8 @@ export default function BookingModal({ studio, onClose }) {
 
         <div className="bg-base-200 rounded-lg p-3 mt-4">
           <p>Rate: ${studio.hourlyRate} / hr</p>
-          <p>Hours: {hours}</p>
-          <p className="font-bold text-primary text-lg">Total: ${total}</p>
+          <p>Hours: {+hours.toFixed(2)}</p>
+          <p className="font-bold text-primary text-lg">Total: ${+total.toFixed(2)}</p>
           <p className="text-sm opacity-70">Security deposit: ${studio.securityDeposit}</p>
         </div>
 

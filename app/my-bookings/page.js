@@ -75,7 +75,7 @@ function MyBookings() {
                   <span className={`badge ${badge[b.status]}`}>{b.status}</span>
                 </div>
                 <p className="opacity-70">{b.location}</p>
-                <p>{b.date} | {b.startTime} - {b.endTime} ({b.hours} hrs)</p>
+                <p>{b.date} | {b.startTime} - {b.endTime} ({+Number(b.hours).toFixed(2)} hrs)</p>
                 <p className="font-bold text-primary">Total: ${b.totalPrice}</p>
                 {(b.status === "Confirmed" || b.status === "Completed") && (
                   <div className="card-actions justify-end">
