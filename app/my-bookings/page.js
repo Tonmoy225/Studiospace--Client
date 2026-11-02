@@ -6,6 +6,7 @@ import { api } from "@/lib/api";
 import PrivateRoute from "@/components/PrivateRoute";
 import ConfirmModal from "@/components/ConfirmModal";
 import Loader from "@/components/Loader";
+import { downloadInvoice } from "@/lib/invoice";
 
 const badge = {
   Pending: "badge-warning",
@@ -28,6 +29,7 @@ function MyBookings() {
   }, []);
 
   const handleCancel = async () => {
+
     setCancelling(true);
     try {
       await api(`/bookings/${cancelId}/cancel`, { method: "PATCH" });
@@ -38,6 +40,15 @@ function MyBookings() {
     }
     setCancelling(false);
     setCancelId(null);
+  };
+  
+    const handleInvoice = async (b) => {
+    try {
+      await downloadInvoice(b);
+      toast.success("Invoice downloaded");
+    } catch (err) {
+      toast.error("Could not create the invoice");
+    }
   };
 
   if (loading) return <Loader />;

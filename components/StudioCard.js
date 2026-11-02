@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FiMapPin } from "react-icons/fi";
+import WishlistButton from "./WishlistButton";
 
 export default function StudioCard({ studio }) {
   return (
@@ -18,6 +19,8 @@ export default function StudioCard({ studio }) {
         <span className="absolute top-3 right-3 rounded-full bg-black/60 px-3 py-1 text-xs font-bold text-warning backdrop-blur-sm">
           {studio.rating ? studio.rating.toFixed(1) : "New"}
         </span>
+                {/* heart: save to wishlist */}
+        <WishlistButton studioId={studio._id} />
       </figure>
 
       <div className="card-body p-5 gap-2">

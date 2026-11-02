@@ -90,6 +90,7 @@ export default function Navbar() {
               <li><Link href="/add-studio">Add New Studio</Link></li>
               <li><Link href="/my-listings">My Studio Listings</Link></li>
               <li><Link href="/my-bookings">My Bookings</Link></li>
+              <li><Link href="/wishlist">Saved Studios</Link></li>
               <li><button onClick={handleLogout} className="text-error">Logout</button></li>
             </ul>
           </div>
