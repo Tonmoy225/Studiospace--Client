@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { api } from "@/lib/api";
@@ -11,6 +11,7 @@ export default function BookingModal({ studio, onClose }) {
   const [date, setDate] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
+  const [booked, setBooked] = useState([]); // confirmed slots on the selected date
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -19,6 +20,22 @@ export default function BookingModal({ studio, onClose }) {
     ? (toMin(endTime) - toMin(startTime)) / 60
     : 0;
   const total = hours * studio.hourlyRate;
+
+  // Challenge 2: load confirmed bookings of this studio for the chosen date
+  useEffect(() => {
+    if (!date) {
+      setBooked([]);
+      return;
+    }
+    api(`/studios/${studio._id}/booked?date=${date}`)
+      .then(setBooked)
+      .catch(() => setBooked([]));
+  }, [date, studio._id]);
+
+  // instant warning (server still checks again before saving)
+  const clash = hours > 0
+    ? booked.find((b) => toMin(startTime) < toMin(b.endTime) && toMin(endTime) > toMin(b.startTime))
+    : null;
 
   const handleBook = async (e) => {
     e.preventDefault();
@@ -46,6 +63,15 @@ export default function BookingModal({ studio, onClose }) {
         <label className="label mt-3">Date</label>
         <input type="date" min={today} required value={date} onChange={(e) => setDate(e.target.value)} className="input input-bordered w-full" />
 
+        {date && booked.length > 0 && (
+          <div className="alert alert-warning mt-3 text-sm block">
+            <p className="font-semibold">Already booked on this date:</p>
+            {booked.map((b, i) => (
+              <p key={i}>{b.startTime} - {b.endTime}</p>
+            ))}
+          </div>
+        )}
+
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="label mt-3">Start Time</label>
@@ -56,6 +82,12 @@ export default function BookingModal({ studio, onClose }) {
             <input type="time" required value={endTime} onChange={(e) => setEndTime(e.target.value)} className="input input-bordered w-full" />
           </div>
         </div>
+
+        {clash && (
+          <p className="text-error text-sm mt-3">
+            This time overlaps a confirmed booking ({clash.startTime} - {clash.endTime}). Please choose another time.
+          </p>
+        )}
 
         <div className="bg-base-200 rounded-lg p-3 mt-4">
           <p>Rate: ${studio.hourlyRate} / hr</p>
@@ -68,7 +100,7 @@ export default function BookingModal({ studio, onClose }) {
 
         <div className="modal-action">
           <button type="button" className="btn" onClick={onClose}>Close</button>
-          <button className="btn btn-primary" disabled={loading || hours === 0}>
+          <button className="btn btn-primary" disabled={loading || hours === 0 || !!clash}>
             {loading ? "Booking..." : "Confirm Booking"}
           </button>
         </div>
