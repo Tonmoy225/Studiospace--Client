@@ -3,7 +3,7 @@
 > Book photo studios, film stages, podcast lounges, music suites and art workshops by the hour.
 
 🔗 **Live Site:** https://studiospace-client-ochre.vercel.app/
-🔗 **Server site:**https://studiospace-server-1g07honf4-tom-space.vercel.app/
+🔗 **Server site:**
 🔗 **Server Repo:** https://github.com/Tonmoy225/Studiospace-server/tree/main
 🔗 **Client Repo:** https://github.com/Tonmoy225/Studiospace--Client
 

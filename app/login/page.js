@@ -4,12 +4,14 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 import { authClient } from "@/lib/auth-client";
 
 export default function LoginPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   // go back to the page the user wanted (only local paths allowed)
   const getRedirect = () => {
@@ -58,7 +60,23 @@ export default function LoginPage() {
           <input name="email" type="email" required placeholder="you@example.com" className="input input-bordered w-full" />
 
           <label className="label">Password</label>
-          <input name="password" type="password" required placeholder="Your password" className="input input-bordered w-full" />
+          <div className="relative">
+            <input
+              name="password"
+              type={showPassword ? "text" : "password"}
+              required
+              placeholder="Your password"
+              className="input input-bordered w-full pr-12"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((s) => !s)}
+              aria-label={showPassword ? "Hide password" : "Show password"}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-lg opacity-70 hover:opacity-100"
+            >
+              {showPassword ? <FiEyeOff /> : <FiEye />}
+            </button>
+          </div>
 
           <button type="button" onClick={() => toast("Forgot password will be added soon")} className="text-sm text-primary text-left">
             Forgot Password?
