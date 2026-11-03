@@ -30,3 +30,16 @@ body {
 img {
   max-width: 100%;
 }
+/* ---- Logo iris rotation (used by <LogoIcon spin /> on the loading screen) ----
+   Own keyframes: Tailwind v4 only emits its "spin" keyframes when the
+   `animate-spin` class is used, so an inline `animation: spin` never ran. */
+@keyframes iris-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.iris-spin {
+  transform-box: view-box;
+  transform-origin: 24px 24px;
+  animation: iris-spin 2.4s linear infinite;
+}

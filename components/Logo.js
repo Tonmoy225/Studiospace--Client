@@ -1,6 +1,7 @@
 // StudioSpace logo: a camera lens (outer ring, 6 iris blades, glass centre with a light reflection).
 // Colour comes from the text colour (currentColor), so wrap it in `text-primary`.
 // <LogoIcon spin /> rotates the iris, used in the loading screen.
+// The rotation is the `.iris-spin` class + `@keyframes iris-spin` in app/globals.css.
 
 export function LogoIcon({ className = "h-10 w-10", spin = false }) {
   const blades = [0, 1, 2, 3, 4, 5];
@@ -12,9 +13,7 @@ export function LogoIcon({ className = "h-10 w-10", spin = false }) {
       <circle cx="24" cy="24" r="19.5" fill="#111827" />
 
       {/* iris blades (this group rotates when spin is true) */}
-      <g
-        style={{ transformOrigin: "24px 24px", animation: spin ? "spin 2.4s linear infinite" : "none" }}
-      >
+      <g className={spin ? "iris-spin" : undefined}>
         {blades.map((i) => (
           <path
             key={i}
