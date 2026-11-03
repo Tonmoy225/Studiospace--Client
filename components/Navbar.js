@@ -2,9 +2,10 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { FiAperture, FiMenu } from "react-icons/fi";
+import { FiMenu } from "react-icons/fi";
 import { authClient } from "@/lib/auth-client";
 import ThemeToggle from "./ThemeToggle";
+import Logo from "./Logo";
 
 const links = [
   { label: "Home", href: "/" },
@@ -26,10 +27,19 @@ export default function Navbar() {
     router.push("/");
   };
 
+  // "How It Works" is a section on the home page: smooth scroll to it
+  const handleLinkClick = (e, href) => {
+    if (href.startsWith("/#") && pathname === "/") {
+      e.preventDefault();
+      document.getElementById(href.slice(2))?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const navLinks = links.map((l) => (
     <li key={l.label}>
       <Link
         href={l.href}
+        onClick={(e) => handleLinkClick(e, l.href)}
         className={
           pathname === l.href
             ? "text-primary font-bold border-b-2 border-primary rounded-none"
@@ -41,7 +51,7 @@ export default function Navbar() {
     </li>
   ));
 
-    return (
+  return (
     <div className="navbar bg-base-100 shadow-sm sticky top-0 z-50 px-2 sm:px-4 lg:px-10 gap-1">
       {/* LEFT: hamburger (mobile) + logo */}
       <div className="navbar-start w-auto flex-1">
@@ -59,8 +69,8 @@ export default function Navbar() {
             )}
           </ul>
         </div>
-        <Link href="/" className="flex items-center gap-1 sm:gap-2 text-base sm:text-2xl font-bold text-primary whitespace-nowrap">
-          <FiAperture className="text-xl sm:text-3xl" /> StudioSpace
+        <Link href="/">
+          <Logo />
         </Link>
       </div>
 
